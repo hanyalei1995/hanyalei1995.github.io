@@ -20,15 +20,24 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="韩贺儿">
-<meta property="og:url" content="http://example.com/categories/hexo/index.html">
+  <meta name="description" content="mysql 升级mysql8.0.29 navicat 链接报 CLIENT DOES NOT SUPPORT AUTHENTICATION 问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解决 CLIENT DOES NOT SUPPORT AUTHENTICATION">
+<meta property="og:url" content="http://example.com/2022/06/24/mysql-%E5%8D%87%E7%BA%A7mysql8-0-29%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9D%91/index.html">
 <meta property="og:site_name" content="韩贺儿">
+<meta property="og:description" content="mysql 升级mysql8.0.29 navicat 链接报 CLIENT DOES NOT SUPPORT AUTHENTICATION 问题">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/images/mysql%E5%8D%87%E7%BA%A7/%E9%97%AE%E9%A2%98.png">
+<meta property="og:image" content="http://example.com/images/mysql%E5%8D%87%E7%BA%A7/%E4%BF%AE%E6%94%B9%E7%BB%93%E6%9E%9C.png">
+<meta property="og:image" content="http://example.com/images/mysql%E5%8D%87%E7%BA%A7/user-host.png">
+<meta property="article:published_time" content="2022-06-24T14:52:57.000Z">
+<meta property="article:modified_time" content="2022-06-25T06:02:41.749Z">
 <meta property="article:author" content="韩贺儿">
+<meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/mysql%E5%8D%87%E7%BA%A7/%E9%97%AE%E9%A2%98.png">
 
-<link rel="canonical" href="http://example.com/categories/hexo/">
+<link rel="canonical" href="http://example.com/2022/06/24/mysql-%E5%8D%87%E7%BA%A7mysql8-0-29%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9D%91/">
 
 
 <script id="page-configurations">
@@ -36,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>分类: hexo | 韩贺儿</title>
+  <title>解决 CLIENT DOES NOT SUPPORT AUTHENTICATION | 韩贺儿</title>
   
 
 
@@ -154,51 +163,102 @@
         <div class="content-wrap">
           
 
-          <div class="content category">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <h2 class="collection-header">hexo
-          <small>分类</small>
-        </h2>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/24/mysql-%E5%8D%87%E7%BA%A7mysql8-0-29%E5%AE%89%E8%A3%85%E5%8F%8A%E5%9D%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="韩贺儿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="韩贺儿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          解决 CLIENT DOES NOT SUPPORT AUTHENTICATION
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-06-24 22:52:57" itemprop="dateCreated datePublished" datetime="2022-06-24T22:52:57+08:00">2022-06-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-06-25 14:02:41" itemprop="dateModified" datetime="2022-06-25T14:02:41+08:00">2022-06-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">mysql 升级mysql8.0.29 navicat 链接报 CLIENT DOES NOT SUPPORT AUTHENTICATION 问题</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
+        <h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h3><p>刚安装完mysql8.0.11，连接时报错：<br>在navicat中报错client does not support authentication<br><img src="/images/mysql%E5%8D%87%E7%BA%A7/%E9%97%AE%E9%A2%98.png" alt="问题"></p>
+<h3 id="问题原因"><a href="#问题原因" class="headerlink" title="问题原因"></a>问题原因</h3><p>在8.0+中使用指定使用caching_sha2_password创建用户账号密码时，本地navicat的版本暂时不支持，从而导致连接认证失败。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>修改用户的加密方式 或者升级内核<br>为了以防出现其他问题, 选择修改用户的加密方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">alter user &#x27;root&#x27;@&#x27;localhost&#x27; identified with mysql_native_password by &#x27;新密码&#x27;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/mysql%E5%8D%87%E7%BA%A7/%E4%BF%AE%E6%94%B9%E7%BB%93%E6%9E%9C.png" alt="修改结果"><br>执行失败的, 请查看下root用户的host 是否为localhost<br>(Host列指定了允许用户登录所使用的IP，比如user=root Host=192.168.1.1。这里的意思就是说root用户只能通过192.168.1.1的客户端去访问。<br>而%是个通配符，如果Host=192.168.1.%，那么就表示只要是IP地址前缀为“192.168.1.”的客户端都可以连接。如果Host=%，表示所有IP都有连接权限。)<br>如果不是,改为对应的host值即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select Host,user from user;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/mysql%E5%8D%87%E7%BA%A7/user-host.png" alt="查询结果"><br>如果还不能执行成功, 检查语句的标点符号</p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+    
+    
+    
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2022-06-22T17:30:03+08:00"
-              content="2022-06-22">
-          06-22
-        </time>
-      </div>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/mysql/" rel="tag"># mysql</a>
+          </div>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/06/22/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" itemprop="url">
-            <span itemprop="name">hexo搭建个人博客</span>
-          </a>
-      </div>
+        
 
-    </header>
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/06/23/xxl-job-%E5%88%86%E5%B8%83%E5%BC%8F%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E4%B8%AD%E5%BF%83/" rel="prev" title="xxl-job 分布式任务调度中心">
+      <i class="fa fa-chevron-left"></i> xxl-job 分布式任务调度中心
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
   </article>
-
-    </div>
-  </div>
   
   
-  
-
   
 
 
@@ -251,6 +311,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">遇到的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E5%8E%9F%E5%9B%A0"><span class="nav-number">2.</span> <span class="nav-text">问题原因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
