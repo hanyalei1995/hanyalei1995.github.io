@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Ribbon和Feign的使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ribbon和Feign的使用">
+<meta property="og:url" content="http://example.com/2022/07/07/Spring-Cloud-Alibaba%E4%B9%8BRibbon/index.html">
+<meta property="og:site_name" content="韩贺儿">
+<meta property="og:description" content="Ribbon和Feign的使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-07-07T07:13:35.000Z">
+<meta property="article:modified_time" content="2022-07-18T07:31:57.168Z">
+<meta property="article:author" content="韩贺儿">
+<meta property="article:tag" content="Spring cloud">
+<meta property="article:tag" content="Ribbon">
+<meta property="article:tag" content="Feign">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2022/07/07/Spring-Cloud-Alibaba%E4%B9%8BRibbon/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Ribbon和Feign的使用 | 韩贺儿</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>.darkmode--activated{--body-bg-color:#282828;--content-bg-color:#333;--card-bg-color:#555;--text-color:#ccc;--blockquote-color:#bbb;--link-color:#ccc;--link-hover-color:#eee;--brand-color:#ddd;--brand-hover-color:#ddd;--table-row-odd-bg-color:#282828;--table-row-hover-bg-color:#363636;--menu-item-bg-color:#555;--btn-default-bg:#222;--btn-default-color:#ccc;--btn-default-border-color:#555;--btn-default-hover-bg:#666;--btn-default-hover-color:#ccc;--btn-default-hover-border-color:#666;--highlight-background:#282b2e;--highlight-foreground:#a9b7c6;--highlight-gutter-background:#34393d;--highlight-gutter-foreground:#9ca9b6}.darkmode--activated img{opacity:.75}.darkmode--activated img:hover{opacity:.9}.darkmode--activated code{color:#69dbdc;background:0 0}button.darkmode-toggle{z-index:9999}</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">韩贺儿</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/Spring-Cloud-Alibaba%E4%B9%8BRibbon/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="韩贺儿">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="韩贺儿">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Ribbon和Feign的使用
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-07-07 15:13:35" itemprop="dateCreated datePublished" datetime="2022-07-07T15:13:35+08:00">2022-07-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-07-18 15:31:57" itemprop="dateModified" datetime="2022-07-18T15:31:57+08:00">2022-07-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-cloud/" itemprop="url" rel="index"><span itemprop="name">Spring cloud</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-cloud/Ribbon/" itemprop="url" rel="index"><span itemprop="name">Ribbon</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Spring-cloud/Ribbon/Feign/" itemprop="url" rel="index"><span itemprop="name">Feign</span></a>
+                </span>
+            </span>
+
+          
+            <div class="post-description">Ribbon和Feign的使用</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Ribbon-负载均衡"><a href="#Ribbon-负载均衡" class="headerlink" title="Ribbon 负载均衡"></a>Ribbon 负载均衡</h2><p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/bc94624fb898">来源</a><br>Nacos中包含了Ribbon 不需要再引入Ribbon<br>创建RestTemplate</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="meta">@LoadBalanced</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="LoadBalanced-注解原理"><a href="#LoadBalanced-注解原理" class="headerlink" title="@LoadBalanced 注解原理"></a>@LoadBalanced 注解原理</h3><p>为何在RestTemplate Bean上加上@LoadBalanced注解即可实现负载均衡?<br>首先看下@LoadBalanced注解的实现   </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(&#123;ElementType.FIELD, ElementType.PARAMETER, ElementType.METHOD&#125;)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Inherited</span></span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LoadBalanced &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在LoadBalancerAutoConfiguration 类 注入所有符合条件的RestTemplate</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@LoadBalanced</span></span><br><span class="line">    <span class="meta">@Autowired(</span></span><br><span class="line"><span class="meta">        required = false</span></span><br><span class="line"><span class="meta">    )</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;RestTemplate&gt; restTemplates = Collections.emptyList();</span><br></pre></td></tr></table></figure>
+<p>如果判断符合条件的RestTemplate<br>Spring在处理自动注入时，会使用DefaultListableBeanFactory.resolveDepenency方法去完成依赖的注入<br>而在处理自动注入时，会用到AutowireCandidateResolver，去判断容器当中的所有的Bean，<br>挨个去匹配是否可以作为当前依赖的注入对象 isAutowireCandidate方法中判断   </p>
+<p>注意到@LoadBalanced注解上打了一个@Qualifier注解，因此查看<br>AutowireCandidateResolver的子类QualifierAnnotationAutowireCandidateResolver的isAutowireCandidate方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isAutowireCandidate</span><span class="params">(BeanDefinitionHolder bdHolder, DependencyDescriptor descriptor)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> match = <span class="keyword">super</span>.isAutowireCandidate(bdHolder, descriptor);</span><br><span class="line">        <span class="keyword">if</span> (match) &#123;</span><br><span class="line">            match = <span class="keyword">this</span>.checkQualifiers(bdHolder, descriptor.getAnnotations());</span><br><span class="line">            <span class="keyword">if</span> (match) &#123;</span><br><span class="line">                MethodParameter methodParam = descriptor.getMethodParameter();</span><br><span class="line">                <span class="keyword">if</span> (methodParam != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    Method method = methodParam.getMethod();</span><br><span class="line">                    <span class="keyword">if</span> (method == <span class="keyword">null</span> || Void.TYPE == method.getReturnType()) &#123;</span><br><span class="line">                        match = <span class="keyword">this</span>.checkQualifiers(bdHolder, methodParam.getMethodAnnotations());</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> match;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>所以LoadBalancerAutoConfiguration注入的时候会去匹配RestTemplate上是否有Qualifier注解,<br>并且如果有Qualifier注解的话，必须完全匹配才行(LoadBalancerAutoConfiguration 类上restTemplates属性加了@LoadBalanced注解, 程序创建的RestTemplate Bean 两边都有@Qualifier注解，并且两边的@Qualifier注解的value属性也确实都是空字符串) 所以匹配到, 注入到LoadBalancerAutoConfiguration中 restTemplates了  </p>
+<p>因此LoadBalancerAutoConfiguration 类上restTemplates属性加了@LoadBalanced注解，<br>只是为了匹配所有的加了Qualifier(并且value属性为空字符串)的所有的RestTemplate，<br>而我们自己加的@LoadBalanced，也只是为了给它加一个@Qualifier注解罢了<br>所以我们在添加RestTemplate Bean的时候, 不加@Loadbalanced注解, 该用 @Qualifier 实际上是一样的</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="comment">//@LoadBalanced</span></span><br><span class="line"><span class="meta">@Qualifier</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> RestTemplate <span class="title">getInstance</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> RestTemplate();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Ribbon-如何实现的负载均衡"><a href="#Ribbon-如何实现的负载均衡" class="headerlink" title="Ribbon 如何实现的负载均衡"></a>Ribbon 如何实现的负载均衡</h3><p>Ribbon是使用拦截器来实现服务的远程调用的<br>未完待续….</p>
+<h3 id="指定Ribbon-负载均衡策略"><a href="#指定Ribbon-负载均衡策略" class="headerlink" title="指定Ribbon 负载均衡策略"></a>指定Ribbon 负载均衡策略</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="自定义负载均衡策略"><a href="#自定义负载均衡策略" class="headerlink" title="自定义负载均衡策略"></a>自定义负载均衡策略</h3><h2 id="Feign"><a href="#Feign" class="headerlink" title="Feign"></a>Feign</h2>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring-cloud/" rel="tag"># Spring cloud</a>
+              <a href="/tags/Ribbon/" rel="tag"># Ribbon</a>
+              <a href="/tags/Feign/" rel="tag"># Feign</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/01/spring-cloud-alibaba-%E4%B9%8B-nacos-%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83/" rel="prev" title="spring cloud alibaba 之 nacos 注册中心">
+      <i class="fa fa-chevron-left"></i> spring cloud alibaba 之 nacos 注册中心
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ribbon-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.</span> <span class="nav-text">Ribbon 负载均衡</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LoadBalanced-%E6%B3%A8%E8%A7%A3%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">@LoadBalanced 注解原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ribbon-%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E7%9A%84%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="nav-number">1.2.</span> <span class="nav-text">Ribbon 如何实现的负载均衡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9ARibbon-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="nav-number">1.3.</span> <span class="nav-text">指定Ribbon 负载均衡策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="nav-number">1.4.</span> <span class="nav-text">自定义负载均衡策略</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Feign"><span class="nav-number">2.</span> <span class="nav-text">Feign</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">韩贺儿</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">韩贺儿</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+
+<script>
+var options = {
+  bottom: '64px',
+  right: 'unset',
+  left: '32px',
+  time: '0.5s',
+  mixColor: 'transparent',
+  backgroundColor: 'transparent',
+  buttonColorDark: '#100f2c',
+  buttonColorLight: '#fff',
+  saveInCookies: true,
+  label: '🌓',
+  autoMatchOsTheme: true
+}
+const darkmode = new Darkmode(options);
+window.darkmode = darkmode;
+darkmode.showWidget();
+</script>
+
+</body>
+</html>
