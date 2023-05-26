@@ -28,8 +28,9 @@
 <meta property="og:description" content="git 常用命令">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/images/git%E5%AD%A6%E4%B9%A0/%E6%8F%90%E4%BA%A4%E5%B7%B2%E6%9C%89%E4%BB%A3%E7%A0%81%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E6%8A%A5%E9%94%99.png">
+<meta property="og:image" content="http://example.com/images/git%E5%AD%A6%E4%B9%A0/git%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80.png">
 <meta property="article:published_time" content="2022-11-16T13:51:03.000Z">
-<meta property="article:modified_time" content="2023-02-01T14:54:28.048Z">
+<meta property="article:modified_time" content="2023-05-26T09:09:53.746Z">
 <meta property="article:author" content="韩贺儿">
 <meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
@@ -198,7 +199,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-01 22:54:28" itemprop="dateModified" datetime="2023-02-01T22:54:28+08:00">2023-02-01</time>
+                <time title="修改时间：2023-05-26 17:09:53" itemprop="dateModified" datetime="2023-05-26T17:09:53+08:00">2023-05-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -285,6 +286,8 @@
 <h2 id="8-撤销git-add的内容"><a href="#8-撤销git-add的内容" class="headerlink" title="8. 撤销git add的内容"></a>8. 撤销git add的内容</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset 文件</span><br><span class="line"><span class="comment">//全部撤销</span></span><br><span class="line">git reset</span><br></pre></td></tr></table></figure>
 
 <h2 id="9-git账户修改密码"><a href="#9-git账户修改密码" class="headerlink" title="9. git账户修改密码"></a>9. git账户修改密码</h2><p>1.打开控制面板（快捷打开win+R，输入control）<br>2.点击打开用户账户<br>3.点击凭据管理器<br>4.点击windows凭据删除你的git凭据即可</p>
+<h2 id="10-修改远程仓库地址"><a href="#10-修改远程仓库地址" class="headerlink" title="10. 修改远程仓库地址"></a>10. 修改远程仓库地址</h2><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接修改</span></span><br><span class="line">git remote -v <span class="comment">// 查看当前远程仓库地址</span></span><br><span class="line">git remote set-url origin [url] <span class="comment">// url 为新的远程仓库地址</span></span><br><span class="line"><span class="comment">// 先移除 再添加</span></span><br><span class="line">git remote rm origin</span><br><span class="line">git remote add origin [url]</span><br></pre></td></tr></table></figure>
+<p>或者修改.git 文件下架的config配置文件<br>修改url即可 如下图<br><img src="/images/git%E5%AD%A6%E4%B9%A0/git%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E4%B8%AD%E7%9A%84%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80.png" alt="修改配置文件中的远程仓库地址"></p>
 
     </div>
 
@@ -368,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GIT"><span class="nav-text">GIT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-GIT%E5%AD%A6%E4%B9%A0"><span class="nav-text">1. GIT学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B0%86%E6%9C%80%E6%96%B0%E7%9A%84master%E5%88%86%E6%94%AF%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E5%88%B0%E5%85%B6%E4%BB%96%E5%88%86%E6%94%AF"><span class="nav-text">2. 将最新的master分支代码更新到其他分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-GIT%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D-%E9%82%AE%E7%AE%B1"><span class="nav-text">3. GIT配置用户名,邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GIT%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%EF%BC%8C%E4%BF%9D%E6%8C%81%E4%B8%8E%E4%BB%93%E5%BA%93%E4%B8%AD%E4%B8%80%E8%87%B4"><span class="nav-text">4. GIT更新本地的远程分支，保持与仓库中一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-git-stash"><span class="nav-text">5. git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%BB%8EA%E5%88%86%E6%94%AF%E7%9A%84%E6%9F%90%E4%B8%80%E4%B8%AA%E6%8F%90%E4%BA%A4%E6%96%B0%E5%BB%BAB%E5%88%86%E6%94%AF"><span class="nav-text">6. 从A分支的某一个提交新建B分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%8F%90%E4%BA%A4%E5%B7%B2%E6%9C%89%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8A"><span class="nav-text">7. 提交已有的代码 到远程仓库上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%92%A4%E9%94%80git-add%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">8. 撤销git add的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-git%E8%B4%A6%E6%88%B7%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-text">9. git账户修改密码</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#GIT"><span class="nav-text">GIT</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-GIT%E5%AD%A6%E4%B9%A0"><span class="nav-text">1. GIT学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%B0%86%E6%9C%80%E6%96%B0%E7%9A%84master%E5%88%86%E6%94%AF%E4%BB%A3%E7%A0%81%E6%9B%B4%E6%96%B0%E5%88%B0%E5%85%B6%E4%BB%96%E5%88%86%E6%94%AF"><span class="nav-text">2. 将最新的master分支代码更新到其他分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-GIT%E9%85%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%90%8D-%E9%82%AE%E7%AE%B1"><span class="nav-text">3. GIT配置用户名,邮箱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-GIT%E6%9B%B4%E6%96%B0%E6%9C%AC%E5%9C%B0%E7%9A%84%E8%BF%9C%E7%A8%8B%E5%88%86%E6%94%AF%EF%BC%8C%E4%BF%9D%E6%8C%81%E4%B8%8E%E4%BB%93%E5%BA%93%E4%B8%AD%E4%B8%80%E8%87%B4"><span class="nav-text">4. GIT更新本地的远程分支，保持与仓库中一致</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-git-stash"><span class="nav-text">5. git stash</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%BB%8EA%E5%88%86%E6%94%AF%E7%9A%84%E6%9F%90%E4%B8%80%E4%B8%AA%E6%8F%90%E4%BA%A4%E6%96%B0%E5%BB%BAB%E5%88%86%E6%94%AF"><span class="nav-text">6. 从A分支的某一个提交新建B分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E6%8F%90%E4%BA%A4%E5%B7%B2%E6%9C%89%E7%9A%84%E4%BB%A3%E7%A0%81-%E5%88%B0%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E4%B8%8A"><span class="nav-text">7. 提交已有的代码 到远程仓库上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E6%92%A4%E9%94%80git-add%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-text">8. 撤销git add的内容</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-git%E8%B4%A6%E6%88%B7%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-text">9. git账户修改密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-%E4%BF%AE%E6%94%B9%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93%E5%9C%B0%E5%9D%80"><span class="nav-text">10. 修改远程仓库地址</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -382,20 +385,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
